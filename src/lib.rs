@@ -1,6 +1,10 @@
 
 #![no_std]
 
+use core::sync::atomic::{AtomicU32, Ordering};
+
+static FRAME: AtomicU32 = AtomicU32::new(0);
+
 #[panic_handler]
 fn handle_panic(_: &core::panic::PanicInfo) -> ! {
     loop {}
@@ -23,9 +27,10 @@ pub unsafe extern fn go() {
 }
 
 fn render_frame_safe(buffer: &mut [u32; WIDTH * HEIGHT]) {
+    let f = FRAME.fetch_add(1, Ordering::Relaxed);
     for y in 0..HEIGHT {
         for x in 0..WIDTH {
-            buffer[y * WIDTH + x] = (x ^ y) as u32 | 0xFF_00_00_00;
+            buffer[y * WIDTH + x] = f.wrapping_add((x ^ y) as u32) | 0xFF_00_00_00;
         }
     }
 }

@@ -22,9 +22,12 @@ async function init() {
 
     const ctx = canvas.getContext("2d");
 
-    instance.exports.go();
-
-    ctx.putImageData(image, 0, 0);
+    const render = () => {
+        instance.exports.go();
+        ctx.putImageData(image, 0, 0);
+        requestAnimationFrame(render);
+    }
+    render();
 }
 
 init();
