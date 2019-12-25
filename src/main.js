@@ -1,0 +1,11 @@
+
+async function init() {
+    const { instance } = await WebAssembly.instantiateStreaming(
+        fetch("./bare_metal_wasm.wasm")
+    );
+
+    const answer = instance.exports.the_answer();
+    console.log(answer);
+}
+
+init();
