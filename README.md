@@ -1,6 +1,4 @@
-[asd](http://cliffle.com/blog/bare-metal-wasm/)
-
-Rust WeaAssembly Procedural Animation
+## Rust WebAssembly Procedural Animation
 
 This is a web-based procedural animation program
 which uses WebAssembly
