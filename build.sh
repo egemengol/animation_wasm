@@ -9,7 +9,7 @@ cargo build --target $TARGET --release
 wasm-strip $BINARY
 mkdir -p www
 wasm-opt -o www/bare_metal_wasm.wasm -Oz $BINARY
-ls -lh www/bare_metal_wasm.wasm
+ls -lh www/
 
 WWW=www
 
